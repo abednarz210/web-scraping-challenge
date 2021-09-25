@@ -33,8 +33,13 @@ def scrape():
     #JPL Mars Space Images - Featured Image
     mars_image_url = "https://spaceimages-mars.com/"
     browser.visit(mars_image_url)
+    browser.links.find_by_partial_text('FULL IMAGE').click()
+    html = browser.html
+    mars_image_soup= bs(html,'html.parser')
+    mars_image_url = mars_image_soup.body.find("img", class_= "fancybox-image")
+    mars_image_url['src']
 
-
+    
     # Mars Facts
     mars_facts_url = "https://galaxyfacts-mars.com/"
     mars_table =  pd.read_html(mars_facts_url)
